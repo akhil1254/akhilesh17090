@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Day Registration - S.I.W.S College</title>
+    <link rel="stylesheet" href="style.css">5
+</head>
+<body>
+    <div class="container">
+        <h1>Sports Day Registration</h1>
+        <p class="college-name">S.I.W.S COLLEGE</p>
+        <form id="sportsRegistrationForm">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required placeholder="Enter your age">
+            </div>
+
+            <div class="form-group">
+                <label for="sport">Select Sport:</label>
+                <select id="sport" name="sport" required>
+                    <option value="" disabled selected>Select a sport</option>
+                    <option value="cricket">Cricket</option>
+                    <option value="football">Football</option>
+                    <option value="badminton">Badminton</option>
+                    <option value="tableTennis">Table Tennis</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div id="customSportDiv" class="form-group hidden">
+                <label for="customSport">Specify Other Sport:</label>
+                <input type="text" id="customSport" name="customSport" placeholder="Enter sport name">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Register</button>
+            </div>
+        </form>
+
+        <div id="confirmationMessage" class="hidden">
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering for the Sports Day. See you on the field!</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("sport").addEventListener("change", function () {
+            const customSportDiv = document.getElementById("customSportDiv");
+            if (this.value === "other") {
+                customSportDiv.classList.remove("hidden");
+            } else {
+                customSportDiv.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("sportsRegistrationForm").addEventListener("submit", function (event) {
+            const sport = document.getElementById("sport").value;
+            const customSport = document.getElementById("customSport").value;
+
+            if (sport === "other" && (!customSport || customSport.trim() === "")) {
+                event.preventDefault();
+                alert("Please specify the sport in the 'Other' field.");
+                return;
+            }
+
+            event.preventDefault();
+            document.getElementById("confirmationMessage").classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
